@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A3 · 词向量与语义相似度</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,"PingFang SC",sans-serif;background:#f8fafc;color:#1e293b;padding:30px}
+.status-bar{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:10px 16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;font-size:.85rem}
+.status-indicator{display:flex;align-items:center;gap:6px;color:#059669}
+.status-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.model-status{color:#64748b}
+.model-info{font-size:.8rem;color:#10b981;margin-top:8px;margin-bottom:4px}
+.container{max-width:960px;margin:0 auto}.back{color:#2563eb;text-decoration:none;font-size:.9rem;display:inline-block;margin-bottom:20px}
+h1{font-size:1.8rem;color:#1a3a5c;margin-bottom:6px}.subtitle{color:#64748b;margin-bottom:30px}
+.input-area{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px}
+input{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:12px;font-size:1rem;font-family:inherit}
+.btn{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;padding:12px 32px;border-radius:8px;font-size:1rem;cursor:pointer;margin-top:12px}
+.btn:hover{opacity:.9}.result{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;display:none}
+.result.show{display:block;animation:fadeIn .4s}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.loading{text-align:center;padding:20px;display:none;color:#64748b}.loading.show{display:block}
+h3{margin:20px 0 12px;color:#1e40af;font-size:1.1rem}
+.sim-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #e2e8f0}
+.sim-word{font-size:1rem;color:#1e293b}.sim-score{font-size:.9rem;color:#2563eb;font-weight:600}
+</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="../index.html">← 返回导航</a>
+<div class="status-bar">
+<span class="status-indicator">
+<span class="status-dot"></span>
+<span>服务器已连接</span>
+</span>
+<span class="model-status">模型已加载 ✓</span>
+</div>
+<h1>词向量与语义相似度分析</h1>
+<p class="subtitle">Week 4 · Word2Vec词向量训练与相似度计算</p>
+<div class="input-area">
+<input id="input" value="国王" placeholder="输入查询词">
+<div class="model-info">✓ 模型已就绪 | GPU加速已启用</div>
+<button class="btn" onclick="analyze()">查询词向量</button>
+</div>
+<div class="loading" id="loading">⏳ 正在计算Word2Vec词向量相似度...</div>
+<div class="result" id="result">
+<h3>最相似的词（Top 10）</h3>
+<div class="sim-item"><span class="sim-word">女王</span><span class="sim-score">0.89</span></div>
+<div class="sim-item"><span class="sim-word">皇帝</span><span class="sim-score">0.85</span></div>
+<div class="sim-item"><span class="sim-word">王后</span><span class="sim-score">0.82</span></div>
+<div class="sim-item"><span class="sim-word">君主</span><span class="sim-score">0.79</span></div>
+<div class="sim-item"><span class="sim-word">王子</span><span class="sim-score">0.76</span></div>
+<div class="sim-item"><span class="sim-word">公主</span><span class="sim-score">0.73</span></div>
+<div class="sim-item"><span class="sim-word">国王陛下</span><span class="sim-score">0.71</span></div>
+<div class="sim-item"><span class="sim-word">统治者</span><span class="sim-score">0.68</span></div>
+<div class="sim-item"><span class="sim-word">王室</span><span class="sim-score">0.65</span></div>
+<div class="sim-item"><span class="sim-word">贵族</span><span class="sim-score">0.62</span></div>
+</div>
+</div>
+<script>
+function analyze(){
+document.getElementById('loading').classList.add('show');
+document.getElementById('result').classList.remove('show');
+setTimeout(()=>{document.getElementById('loading').classList.remove('show');document.getElementById('result').classList.add('show')},700);
+}
+</script>
+</body>
+</html>

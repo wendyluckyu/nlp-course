@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自然语言处理 — 课程实验汇总</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; padding: 40px 20px; color: #f8fafc; }
+.container { max-width: 1200px; margin: 0 auto; }
+header { text-align: center; margin-bottom: 50px; }
+header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+header p { color: #94a3b8; font-size: 1.1rem; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.card { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 16px; padding: 28px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
+.card:hover { transform: translateY(-4px); border-color: rgba(96, 165, 250, 0.5); box-shadow: 0 12px 40px rgba(96, 165, 250, 0.15); }
+.card-week { font-size: 0.8rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-title { font-size: 1.3rem; font-weight: 600; color: #e2e8f0; margin-bottom: 12px; }
+.card-desc { font-size: 0.9rem; color: #94a3b8; line-height: 1.5; }
+.card-num { position: absolute; top: 16px; right: 20px; font-size: 2.5rem; font-weight: 800; color: rgba(96, 165, 250, 0.1); }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>自然语言处理 — 课程实验汇总</h1>
+<p>2024-2025学年 · Vibe Coding 实验合集</p>
+</header>
+<div class="grid">
+<a class="card" href="demos/a1.html"><span class="card-num">01</span><div class="card-week">Week 2</div><div class="card-title">中文分词与词性标注</div><div class="card-desc">基于jieba的中文分词、词性标注与词频统计可视化</div></a>
+<a class="card" href="demos/a2.html"><span class="card-num">02</span><div class="card-week">Week 3</div><div class="card-title">句法分析</div><div class="card-desc">依存句法分析与成分句法树可视化</div></a>
+<a class="card" href="demos/a3.html"><span class="card-num">03</span><div class="card-week">Week 4</div><div class="card-title">词向量与语义相似度</div><div class="card-desc">Word2Vec词向量训练与相似度计算</div></a>
+<a class="card" href="demos/a4.html"><span class="card-num">04</span><div class="card-week">Week 5</div><div class="card-title">深层语义分析</div><div class="card-desc">词义消歧与语义角色标注</div></a>
+<a class="card" href="demos/a5.html"><span class="card-num">05</span><div class="card-week">Week 6</div><div class="card-title">篇章分析与指代消解</div><div class="card-desc">EDU切分与浅层篇章关系识别</div></a>
+<a class="card" href="demos/a6.html"><span class="card-num">06</span><div class="card-week">Week 7</div><div class="card-title">语言模型</div><div class="card-desc">N-gram、RNN与预训练语言模型对比</div></a>
+<a class="card" href="demos/a7.html"><span class="card-num">07</span><div class="card-week">Week 8</div><div class="card-title">信息抽取与知识图谱</div><div class="card-desc">命名实体识别、关系抽取与知识图谱构建</div></a>
+<a class="card" href="demos/a8.html"><span class="card-num">08</span><div class="card-week">Week 9</div><div class="card-title">机器翻译</div><div class="card-desc">神经机器翻译与BLEU自动评测</div></a>
+<a class="card" href="demos/a9.html"><span class="card-num">09</span><div class="card-week">Week 10</div><div class="card-title">情感分析与意见挖掘</div><div class="card-desc">电商评论情感分类与舆情分析</div></a>
+</div>
+</div>
+</body>
+</html>

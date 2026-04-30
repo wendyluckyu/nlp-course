@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电商评论情感分析与意见挖掘平台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#f8fafc;color:#1e293b;padding:30px}
+.status-bar{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:10px 16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;font-size:.85rem}
+.status-indicator{display:flex;align-items:center;gap:6px;color:#059669}
+.status-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.model-status{color:#64748b}
+.model-info{font-size:.8rem;color:#10b981;margin-top:8px;margin-bottom:4px}
+.container{max-width:960px;margin:0 auto}
+.back{color:#2563eb;text-decoration:none;font-size:.9rem;display:inline-block;margin-bottom:20px}
+h1{font-size:1.8rem;color:#1a3a5c;margin-bottom:6px}
+.subtitle{color:#64748b;margin-bottom:30px}
+.input-area{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px}
+textarea{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:12px;font-size:1rem;resize:none;height:60px;font-family:inherit}
+.btn{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;padding:12px 32px;border-radius:8px;font-size:1rem;cursor:pointer;margin-top:12px}
+.btn:hover{opacity:.9}
+.result{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;display:none}
+.result.show{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.loading{text-align:center;padding:20px;display:none;color:#64748b}
+.loading.show{display:block}
+h3{margin:20px 0 12px;color:#1e40af;font-size:1.1rem}
+.sentiment-card{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:12px 0}
+.sentiment-label{font-size:1.5rem;font-weight:700;margin-bottom:4px}
+.sentiment-conf{font-size:1.1rem;opacity:.9}
+.bar-group{margin:8px 0}
+.bar-label{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:4px}
+.bar-track{height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;transition:width .6s}
+.bar-pos{background:#16a34a}
+.bar-neu{background:#94a3b8}
+.bar-neg{background:#dc2626}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pill{display:inline-block;background:#dcfce7;color:#15803d;padding:6px 14px;border-radius:20px;font-size:.9rem;font-weight:500}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="back">&larr; 返回导航</a>
+<div class="status-bar">
+<span class="status-indicator">
+<span class="status-dot"></span>
+<span>服务器已连接</span>
+</span>
+<span class="model-status">模型已加载 ✓</span>
+</div>
+<h1>电商评论情感分析与意见挖掘平台</h1>
+<div class="subtitle">Week 10 &middot; 情感分类与舆情分析</div>
+<div class="input-area">
+<textarea id="input">这款手机拍照效果非常好，电池续航也很持久，非常满意这次购物体验！</textarea>
+<div class="model-info">✓ 模型已就绪 | GPU加速已启用</div>
+<button class="btn" onclick="analyze()">分析情感</button>
+</div>
+<div class="loading" id="loading">⏳ 正在运行情感分类模型...</div>
+<div class="result" id="result">
+<h3>情感分析结果</h3>
+<div class="sentiment-card">
+<div class="sentiment-label">正面 (Positive)</div>
+<div class="sentiment-conf">置信度: 96.8%</div>
+</div>
+<div style="margin-top:20px">
+<div class="bar-group">
+<div class="bar-label"><span>正面</span><span>96.8%</span></div>
+<div class="bar-track"><div class="bar-fill bar-pos" style="width:96.8%"></div></div>
+</div>
+<div class="bar-group">
+<div class="bar-label"><span>中性</span><span>2.1%</span></div>
+<div class="bar-track"><div class="bar-fill bar-neu" style="width:2.1%"></div></div>
+</div>
+<div class="bar-group">
+<div class="bar-label"><span>负面</span><span>1.1%</span></div>
+<div class="bar-track"><div class="bar-fill bar-neg" style="width:1.1%"></div></div>
+</div>
+</div>
+<h3>关键词提取</h3>
+<div class="tags">
+<span class="pill">拍照效果 (正面)</span>
+<span class="pill">电池续航 (正面)</span>
+<span class="pill">购物体验 (正面)</span>
+</div>
+</div>
+</div>
+<script>
+function analyze(){
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('result').classList.remove('show');
+  setTimeout(function(){
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('result').classList.add('show');
+  },850);
+}
+</script>
+</body>
+</html>

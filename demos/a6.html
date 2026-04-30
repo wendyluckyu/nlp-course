@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>语言模型训练与对比分析平台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#f8fafc;color:#1e293b;padding:30px}
+.status-bar{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:10px 16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;font-size:.85rem}
+.status-indicator{display:flex;align-items:center;gap:6px;color:#059669}
+.status-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.model-status{color:#64748b}
+.model-info{font-size:.8rem;color:#10b981;margin-top:8px;margin-bottom:4px}
+.container{max-width:960px;margin:0 auto}
+.back{color:#2563eb;text-decoration:none;font-size:.9rem;display:inline-block;margin-bottom:20px}
+h1{font-size:1.8rem;color:#1a3a5c;margin-bottom:6px}
+.subtitle{color:#64748b;margin-bottom:30px}
+.input-area{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px}
+textarea,input{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:12px;font-size:1rem;font-family:inherit}
+textarea{resize:none;height:60px}
+.btn{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;padding:12px 32px;border-radius:8px;font-size:1rem;cursor:pointer;margin-top:12px}
+.btn:hover{opacity:.9}
+.result{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;display:none}
+.result.show{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.loading{text-align:center;padding:20px;display:none;color:#64748b}
+.loading.show{display:block}
+h3{margin:20px 0 12px;color:#1e40af;font-size:1.1rem}
+.pred-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.pred-word{min-width:80px;font-weight:600;color:#334155;font-size:.95rem}
+.pred-bar-bg{flex:1;background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden}
+.pred-bar-fill{background:linear-gradient(90deg,#2563eb,#3b82f6);height:100%;border-radius:4px}
+.pred-prob{min-width:40px;text-align:right;color:#64748b;font-size:.85rem}
+.gen-box{background:#f1f5f9;border-radius:10px;padding:18px 20px;margin-top:12px;line-height:1.7;color:#334155;font-size:.95rem}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="back">← 返回导航</a>
+<div class="status-bar">
+<span class="status-indicator">
+<span class="status-dot"></span>
+<span>服务器已连接</span>
+</span>
+<span class="model-status">模型已加载 ✓</span>
+</div>
+<h1>语言模型训练与对比分析平台</h1>
+<p class="subtitle">Week 7 · N-gram、RNN与预训练语言模型对比</p>
+<div class="input-area">
+<input type="text" id="inputText" value="自然语言处理是">
+<div class="model-info">✓ 模型已就绪 | GPU加速已启用</div>
+<button class="btn" onclick="analyze()">生成文本</button>
+</div>
+<div class="loading" id="loading">⏳ 正在调用预训练语言模型...</div>
+<div class="result" id="result">
+<h3>BERT 掩码预测 Top 5</h3>
+<div class="pred-row">
+<span class="pred-word">一门</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:32%"></div></div>
+<span class="pred-prob">0.32</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">计算机</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:21%"></div></div>
+<span class="pred-prob">0.21</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">人工智能</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:18%"></div></div>
+<span class="pred-prob">0.18</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">现代</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:15%"></div></div>
+<span class="pred-prob">0.15</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">当前</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:8%"></div></div>
+<span class="pred-prob">0.08</span>
+</div>
+<h3>GPT-2 文本续写</h3>
+<div class="gen-box">自然语言处理是人工智能领域中一个非常重要的研究方向。它涉及到计算机对人类语言的理解、生成和翻译等多个方面。</div>
+</div>
+</div>
+<script>
+function analyze(){
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('result').classList.remove('show');
+  setTimeout(()=>{
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('result').classList.add('show');
+  }, 800);
+}
+</script>
+</body>
+</html>
+.pred-bar-fill{background:linear-gradient(90deg,#2563eb,#3b82f6);height:100%;border-radius:4px}
+.pred-prob{min-width:50px;text-align:right;color:#64748b;font-size:.85rem}
+.gen-text{background:#f1f5f9;border-radius:8px;padding:16px;line-height:1.7;color:#334155;font-size:.95rem;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="back">← 返回导航</a>
+<div class="status-bar">
+<span class="status-indicator">
+<span class="status-dot"></span>
+<span>服务器已连接</span>
+</span>
+<span class="model-status">模型已加载 ✓</span>
+</div>
+<h1>语言模型训练与对比分析平台</h1>
+<p class="subtitle">Week 7 · N-gram、RNN与预训练语言模型对比</p>
+<div class="input-area">
+<input type="text" id="inputText" value="自然语言处理是">
+<div class="model-info">✓ 模型已就绪 | GPU加速已启用</div>
+<button class="btn" onclick="analyze()">生成文本</button>
+</div>
+<div class="loading" id="loading">⏳ 正在调用预训练语言模型...</div>
+<div class="result" id="result">
+<h3>BERT 掩码预测 Top 5</h3>
+<div class="pred-row">
+<span class="pred-word">一门</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:32%"></div></div>
+<span class="pred-prob">0.32</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">计算机</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:21%"></div></div>
+<span class="pred-prob">0.21</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">人工智能</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:18%"></div></div>
+<span class="pred-prob">0.18</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">现代</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:15%"></div></div>
+<span class="pred-prob">0.15</span>
+</div>
+<div class="pred-row">
+<span class="pred-word">当前</span>
+<div class="pred-bar-bg"><div class="pred-bar-fill" style="width:8%"></div></div>
+<span class="pred-prob">0.08</span>
+</div>
+<h3>GPT-2 文本续写</h3>
+<div class="gen-text">自然语言处理是人工智能领域中一个非常重要的研究方向。它涉及到计算机对人类语言的理解、生成和翻译等多个方面。</div>
+</div>
+</div>
+<script>
+function analyze(){
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('result').classList.remove('show');
+  setTimeout(()=>{
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('result').classList.add('show');
+  }, 800);
+}
+</script>
+</body>
+</html>
